@@ -63,14 +63,9 @@ class Tooltip {
 }
 
 class Donut {
-  constructor(name, data, showAll) {
-    var width = screenWidth / 2,
-        height = screenHeight / 2,
-        radius = Math.min(width, height) / 2,
-        donutWidth = radius / 2.5;
-
-    var x = screenWidth / 2 + panAmount * widthFactor,
-        y = screenHeight / 2;
+  constructor(name, data, width, height, x, y) {
+    var radius = Math.min(width, height) / 2;
+    var donutWidth = radius / 2.5;
 
     this.tooltip = new Tooltip((d) => d.data.key);
     this.color = (i) => d3.hcl(i * 27, 10 + 40 * Math.sin(i), 40 + (i % 2) * 40).toString();
@@ -107,12 +102,7 @@ class Donut {
 
      //this.donut.selectAll('path')
 
-     //sets first showAll to false unless other is defined
-     if(showAll == undefined || showAll != true){
       this.showAll = false;
-     }else{
-       this.showAll = showAll;
-     }
   }
 
   get showAll(){
@@ -196,36 +186,36 @@ class Donut {
           .append("tspan")
           .attr("text-anchor", "middle")
           .attr('dy', 0)
-          .attr("x", (screenWidth / 2) + panAmount * widthFactor)
+          .attr("x", (sizes.width / 2) + panAmount * widthFactor)
           .attr('id', 'text-span')
           .text(textToPrint[0])
           .append("tspan")
           .attr("text-anchor", "middle")
-          .attr("x", (screenWidth / 2) + panAmount * widthFactor)
+          .attr("x", (sizes.width / 2) + panAmount * widthFactor)
           .attr('dy', 15)
           .attr('id', 'text-span')
           .text(textToPrint[1])
           .append("tspan")
           .attr("text-anchor", "middle")
-          .attr("x", (screenWidth / 2) + panAmount * widthFactor)
+          .attr("x", (sizes.width / 2) + panAmount * widthFactor)
           .attr('dy', 15)
           .attr('id', 'text-span')
           .text(textToPrint[2])
           .append("tspan")
           .attr("text-anchor", "middle")
-          .attr("x", (screenWidth / 2) + panAmount * widthFactor)
+          .attr("x", (sizes.width / 2) + panAmount * widthFactor)
           .attr('dy', 15)
           .attr('id', 'text-span')
           .text(textToPrint[3])
           .append("tspan")
           .attr("text-anchor", "middle")
-          .attr("x", (screenWidth / 2) + panAmount * widthFactor)
+          .attr("x", (sizes.width / 2) + panAmount * widthFactor)
           .attr('dy', 15)
           .attr('id', 'text-span')
           .text(textToPrint[4])
           .append("tspan")
           .attr("text-anchor", "middle")
-          .attr("x", (screenWidth / 2) + panAmount * widthFactor)
+          .attr("x", (sizes.width / 2) + panAmount * widthFactor)
           .attr('dy', 15)
           .attr('id', 'text-span')
           .text(textToPrint[5]+'...')
@@ -235,7 +225,7 @@ class Donut {
           .on("click", function(){ d3.select(this).attr("target", "_blank").attr("xlink:href", 'http://en.wikipedia.org/wiki/' + searchWord);})
           .append("tspan")
           .attr("text-anchor", "middle")
-          .attr("x", (screenWidth / 2) + panAmount * widthFactor)
+          .attr("x", (sizes.width / 2) + panAmount * widthFactor)
           .attr('dy', 25)
           .attr('id', 'text-span')
           .text('Link to Wikipedia');
@@ -248,7 +238,7 @@ class Donut {
       		.classed("hidden-section", false)
           .append("tspan")
           .attr("text-anchor", "middle")
-          .attr("x", (screenWidth / 2) + panAmount * widthFactor)
+          .attr("x", (sizes.width / 2) + panAmount * widthFactor)
           .attr('id', 'text-span')
           .text("Unfortunately we don't have any additional data about "+ data.key +".").append("tspan")
           .append("a")
@@ -257,7 +247,7 @@ class Donut {
           .on("click", function(){ d3.select(this).attr("target", "_blank").attr("xlink:href", 'http://google.com/#q=' + data.key);})
           .append("tspan")
           .attr("text-anchor", "middle")
-          .attr("x", (screenWidth / 2)+ panAmount * widthFactor)
+          .attr("x", (sizes.width / 2)+ panAmount * widthFactor)
           .attr('dy', 25)
           .attr('id', 'text-span')
           .text("Let me google that for you");
@@ -272,7 +262,7 @@ class Donut {
       .classed("hidden-section", false)
       .append("tspan")
       .attr("text-anchor", "middle")
-      .attr("x", (screenWidth / 2) + panAmount * widthFactor)
+      .attr("x", (sizes.width / 2) + panAmount * widthFactor)
       .attr('id', 'text-span')
       .text("Unfortunately we don't have any additional data about "+ data.key +".")
       .append("a")
@@ -281,7 +271,7 @@ class Donut {
       .on("click", function(){ d3.select(this).attr("target", "_blank").attr("xlink:href", 'http://google.com/#q=' + data.key);})
       .append("tspan")
       .attr("text-anchor", "middle")
-      .attr("x", (screenWidth / 2) + panAmount * widthFactor)
+      .attr("x", (sizes.width / 2) + panAmount * widthFactor)
       .attr('dy', 25)
       .attr('id', 'text-span')
       .text("Let me google that for you");
@@ -301,7 +291,7 @@ class Donut {
           .on("click", function(){ d3.select(this).attr("target", "_blank").attr("xlink:href", 'http://google.com/#q=' + data.key);})
           .append("tspan")
           .attr("text-anchor", "middle")
-          .attr("x", (screenWidth / 2) + panAmount * widthFactor)
+          .attr("x", (sizes.width / 2) + panAmount * widthFactor)
           .attr('dy', 25)
           .attr('id', 'text-span')
           .text("Let me google that for you");
@@ -310,13 +300,13 @@ class Donut {
   }
   tweenPie(b) {
 
-    var width = screenWidth / 2,
-        height = screenHeight / 2,
+    var width = sizes.width / 2,
+        height = sizes.height / 2,
         radius = Math.min(width, height) / 2,
         donutWidth = radius / 2.5;
 
-    var x = screenWidth / 2 + panAmount * widthFactor,
-        y = screenHeight / 2;
+    var x = sizes.width / 2 + panAmount * widthFactor,
+        y = sizes.height / 2;
 
     var tooltip = new Tooltip((d) => d.data.key);
     var color = (i) => d3.hcl(i * 27, 10 + 40 * Math.sin(i), 40 + (i % 2) * 40).toString();
