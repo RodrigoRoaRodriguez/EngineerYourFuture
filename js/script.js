@@ -745,17 +745,17 @@ function bubblePan(d, i) {
   detailBubbles.transition()
     .delay(200)
     .duration(800)
-    .attr("cx", (d, i) => sizes.width/4 + sizes.focusRadius * Math.cos((i - 1)));
+    .attr("cx", (d, i) => sizes.width/3 + sizes.focusRadius * Math.cos((i - 1)));
 
   detailText.transition()
     .delay(200)
     .duration(800)
-    .attr("x", (d, i) => sizes.width/4 +  sizes.focusRadius * Math.cos((i - 1)));
+    .attr("x", (d, i) => sizes.width/3 +  sizes.focusRadius * Math.cos((i - 1)));
 
   bubble.transition()
     .delay(100)
     .duration(800)
-    .attr("cx", sizes.width/4)
+    .attr("cx", sizes.width/5)
     .attr("cy", sizes.height/2)
     .attr("fill", function(d, i) {
       return color(i);
@@ -765,7 +765,7 @@ function bubblePan(d, i) {
   bubbleText.transition()
     .delay(100)
     .duration(800)
-    .attr("x", sizes.width/4)
+    .attr("x", sizes.width/5)
     .attr("y", sizes.height/2)
 
   /*bubbleText.transition()
