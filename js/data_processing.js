@@ -28,34 +28,6 @@ function nestAsData(data, nestingLevels) {
   return nester.entries(data);
 }
 
-// function nestAsMap(data, nestingLevels) {} // Not yet implemented
-
-/**
- * Filters a list of alumni after a set of given criteria. If fields is longer
- * than values then the exheeding values will be used to nest the returned data.
- *
- * @param  {[Alumn]}  data    an array of Alumni
- * @param  {[String]} fields  what fields are of interest
- * @param  {[String]} values  what value the alumni should have at the field
- *                            with the same index.
- * @return {[type]}           an array of Alumni that match the given criteria.
- */
-function matchAsData(data, fields, values) {
-  data = nestAsData(data, fields);
-  if(typeof values !== 'undefined'){
-    var newData = [];
-    values.forEach(function(value) {
-      data.filter(function(d){
-        if(d.key == value){
-          newData.push(d);
-        }
-      })
-    });
-    return newData[0].values;
-  };
-  return data;
-}
-
 /**
  * Filters a list of alumni after a set of given criteria. If fields is longer
  * than values then the exheeding values will be used to nest the returned data.
