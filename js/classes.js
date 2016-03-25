@@ -149,7 +149,7 @@ class Donut {
 }
 //Make all donuts share data
 d3.csv("data/alumni_data.csv", rowToObject, (csv)=>{Donut._csv=csv;});
-d3.json("data/skillsParent.json", (json) => {Donut._json=json;});
+d3.json("data/skills.json", (json) => {Donut._json=json;});
 
 
 class SizeManager {
