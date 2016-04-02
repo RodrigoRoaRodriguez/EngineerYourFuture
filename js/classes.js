@@ -1,9 +1,4 @@
 "use strict";
-/**
- * An object with an attribute for every column in the csv file.
- * @class Alumn
- */
-class Alumn {
   /**
    * An object for every row entry in the csv file.
    * @param  {String} country        Country of origin
@@ -13,13 +8,12 @@ class Alumn {
    * @param  {number} graduation     What year they graduated
    * @constructs Alumn
    */
-  constructor(country, company, profession, education, graduation) {
+function Alumn(country, company, profession, education, graduation) {
     this.Country = country;
     this.Company = company;
     this.Profession = profession;
     this.Education = education;
     this.Graduation = graduation;
-  }
 }
 
 class Tooltip {
